@@ -1,38 +1,59 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">nuxt_integration {{ base_api }}</h1>
-      <h2 class="subtitle">
-        basic integration API with nuxt js
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div class="columns">
+    <div class="column is-three-fifths is-offset-one-fifth">
+      <a
+        href="employee/add"
+        class="button is-primary is-pulled-right"
+        style="margin: 20px 0;"
+      >
+        Add Employee
+      </a>
+      <vuetable
+        ref="vuetable"
+        :fields="['employee_name', 'employee_salary', 'employee_age', 'action']"
+        :css="table"
+        api-url="http://dummy.restapiexample.com/api/v1/employees"
+      >
+        <div slot="employee_salary" slot-scope="props">
+          Rp{{
+            props.rowData.employee_salary
+              .toString()
+              .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+          }}
+        </div>
+        <div slot="action" slot-scope="props">
+          <a :href="`employee/edit/${props.rowData.id}`">Edit</a>
+          <a :href="`employee/delete/${props.rowData.id}`">Delete</a>
+        </div>
+      </vuetable>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Vuetable from 'vuetable-2'
 
 export default {
+  components: {
+    Vuetable
+  },
   data() {
     return {
-      base_api: process.env.BASE_API
+      base_api: process.env.BASE_API,
+      table: {
+        tableWrapper: '',
+        tableHeaderClass: 'fixed',
+        tableBodyClass: 'vuetable-semantic-no-top fixed',
+        tableClass: 'table is-fullwidth is-striped',
+        loadingClass: 'loading',
+        ascendingIcon: 'blue chevron up icon',
+        descendingIcon: 'blue chevron down icon',
+        ascendingClass: 'sorted-asc',
+        descendingClass: 'sorted-desc',
+        sortableIcon: 'grey sort icon',
+        handleIcon: 'grey sidebar icon'
+      }
     }
-  },
-  components: {
-    Logo
   }
 }
 </script>
