@@ -2,9 +2,7 @@
   <div class="container">
     <div>
       <logo />
-      <h1 class="title">
-        nuxt_integration
-      </h1>
+      <h1 class="title">nuxt_integration {{ base_api }}</h1>
       <h2 class="subtitle">
         basic integration API with nuxt js
       </h2>
@@ -28,6 +26,11 @@
 import Logo from '~/components/Logo.vue'
 
 export default {
+  data() {
+    return {
+      base_api: process.env.BASE_API
+    }
+  },
   components: {
     Logo
   }
