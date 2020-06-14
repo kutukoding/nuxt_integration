@@ -22,6 +22,7 @@ $ npm run generate
 ------------------------------------------------------------
 
 # Step by Step Integration 
+- ketika menginstall nuxt js jangan lupa sertakan axios untuk integrasi API nya
 
 ## 1. Setup API
 1. Install env package di diproject anda
@@ -39,6 +40,36 @@ $ npm run generate
 - atau bisa lihat dokumentasinya di : https://github.com/nuxt-community/dotenv-module
 2. Masukan link API anda di file `.env` contoh menggunakan api : http://dummy.restapiexample.com/
 3. Setelah menyimpan `.env` jangan lupa untuk menjalankan ulang server anda
+
+## 2. Integration Datatable
+1. Install vuetable-2 package di project anda
+- instal `npm install vuetable-2@next --save`
+2. Cara install vuetable-2 di component
+- import vuetable anda dengan cara tambahkan script berikut didalam tag script `import Vuetable from 'vuetable-2'`
+- kemudian tambahan `components` di dalam script `export default` dengan nama `Vuetable`
+- kurang lebih seperti berikut tambahan filenya
+```
+<script>
+import Vuetable from 'vuetable-2'
+
+export default {
+  components: {
+    Vuetable
+  },
+  .......
+```
+3. Contoh cara penggunaan vuetable-2
+```
+<vuetable
+  ref="vuetable"
+  :fields="['employee_name', 'employee_salary', 'employee_age', 'action']"
+  :css="table"
+  api-url="http://dummy.restapiexample.com/api/v1/employees"
+></vutable>
+```
+- :fields = nama field yang digunakan
+- :css    = jika mau mengcustom tampilan table
+- api-url = alamat api GET
 
 Resource:
 Free API : http://dummy.restapiexample.com/
