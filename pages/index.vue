@@ -22,6 +22,7 @@
           }}
         </div>
         <div slot="action" slot-scope="props">
+          <a :href="`employee/${props.rowData.id}`">Detail</a>
           <a :href="`employee/edit/${props.rowData.id}`">Edit</a>
           <a :href="`employee/delete/${props.rowData.id}`">Delete</a>
         </div>

@@ -1,0 +1,81 @@
+<template>
+  <div class="columns">
+    <div class="column is-half is-offset-one-quarter">
+      <form>
+        <div class="field">
+          <label class="label">Employee Name</label>
+          <div class="control">
+            <input
+              v-model="name"
+              class="input"
+              type="text"
+              placeholder="please input employee name"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Employee Salary</label>
+          <div class="field-body">
+            <div class="field is-expanded">
+              <div class="field has-addons">
+                <p class="control">
+                  <a class="button is-static">
+                    Rp
+                  </a>
+                </p>
+                <p class="control is-expanded">
+                  <input
+                    v-model="salary"
+                    class="input"
+                    type="number"
+                    placeholder="Your phone number"
+                  />
+                </p>
+              </div>
+              <p class="help">Do not enter the first zero</p>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Age</label>
+          <div class="control">
+            <input
+              v-model="age"
+              class="input"
+              type="number"
+              placeholder="please input age"
+            />
+          </div>
+        </div>
+        <button class="button is-primary is-pulled-right">Save</button>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      baseApi: process.env.BASE_API,
+      name: '',
+      salary: 0,
+      age: 0
+    }
+  },
+  methods: {
+    async getDetail() {
+      const { id } = this.$route.params
+      const result = await this.$axios
+        .$get(`${this.baseApi}employee/${id}`)
+        .catch((error) => {
+          console.log('error:', error)
+        })
+      console.log(result)
+    }
+  },
+  mounted() {
+    this.getDetail()
+  }
+}
+</script>
