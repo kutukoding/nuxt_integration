@@ -66,14 +66,12 @@ export default {
   methods: {
     async submitAdd(e) {
       e.preventDefault()
-
-      const requestData = {
-        name: this.name,
-        salary: this.salary,
-        age: this.age
-      }
       await this.$axios
-        .$post(`${this.baseApi}create`, requestData)
+        .$post(`${this.baseApi}create`, {
+          name: this.name,
+          salary: this.salary,
+          age: this.age
+        })
         .then(function() {
           window.location = '/'
         })
