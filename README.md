@@ -71,5 +71,30 @@ export default {
 - :css    = jika mau mengcustom tampilan table
 - api-url = alamat api GET
 
+-## 3. Integrasi Create Form
+1. Buat form dengan 3 inputan field (name, salary, age).
+2. Siapkan satu object variable untuk menampung data requestData, contoh:
+```
+const requestData = {
+  name: this.name,
+  salary: this.salary,
+  age: this.age
+}
+```
+3. Buat satu API POST untuk mengirim data ke server.
+```
+await this.$axios
+  .$post(`alamat_url_post`, requestData)
+  .then(function() {
+    window.location = '/'
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+```
+- `then` berfungsi jika API yang di request berhasil
+- `catch` berfunsi jika API yand di request gagal
+
+
 Resource:
 Free API : http://dummy.restapiexample.com/
