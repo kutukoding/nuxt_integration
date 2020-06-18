@@ -40,7 +40,6 @@ export default {
   data() {
     return {
       baseApi: process.env.BASE_API,
-      dataTable: {},
       table: {
         tableWrapper: '',
         tableHeaderClass: 'fixed',
