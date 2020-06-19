@@ -1,7 +1,3 @@
-# nuxt_integration
-
-> basic integration API with nuxt js
-
 ## Build Setup
 
 ``` bash
@@ -23,6 +19,7 @@ $ npm run generate
 
 # Step by Step Integration 
 - ketika menginstall nuxt js jangan lupa sertakan axios untuk integrasi API nya
+- jika ingin mengikuti step by step lihat branch sesuai urutan angka nya
 
 ## 1. Setup API
 1. Install env package di diproject anda
