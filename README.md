@@ -117,6 +117,31 @@ async getDetail() {
 - `id` berfungsi mengambil id dari url
 - `$axios.$get(url)` befungsi mengambil data dari API dengan memberikan syarat id
 3. Panggil fungsi tersebut kedalam `mounted` agar dijalankan pertama kali
+-## 5. Integrasi Update
+1. Copy form dari add dan buat folder dengan nama `edit` dan buat 1 file didalam folder tersebut dengan nama file `_id.vue`
+2. rubah fungsi submit formnya ke fungsi update:
+```
+async submitEdit(e) {
+  e.preventDefault()
+
+  const requestData = {
+    name: this.name,
+    salary: this.salary,
+    age: this.age
+  }
+  await this.$axios
+    .$put(`alamat_update/id`, requestData)
+    .then((data) => {
+      alert('Data Berhasil disimpan!')
+      window.location = '/'
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+```
+- berbeda dengan detail maupun update, jika update menggunakan fungsi `$put`
+- dengan mengirimkan alamat update beserta id yang akan dirubah, dan mengirimkan `requestData`
 
 Resource:
 API : https://almock.alterra.dev/enhydra/
