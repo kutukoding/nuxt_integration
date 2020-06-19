@@ -24,7 +24,7 @@
         <div slot="action" slot-scope="props">
           <a :href="`employee/${props.rowData.id}`">Detail</a>
           <a :href="`employee/edit/${props.rowData.id}`">Edit</a>
-          <a :href="`employee/delete/${props.rowData.id}`">Delete</a>
+          <a @click="employeeDelete(props.rowData.id)">Delete</a>
         </div>
       </vuetable>
     </div>
@@ -53,6 +53,24 @@ export default {
         descendingClass: 'sorted-desc',
         sortableIcon: 'grey sort icon',
         handleIcon: 'grey sidebar icon'
+      }
+    }
+  },
+  methods: {
+    async employeeDelete(id) {
+      if (confirm('Are you sure delete this employee?')) {
+        await this.$axios
+          .$delete(`${this.baseApi}Delete/1`, {
+            data: {
+              _id: id
+            }
+          })
+          .then((result) => {
+            alert('Data berhasil dihapus!')
+          })
+          .catch((error) => {
+            console.log('error:', error)
+          })
       }
     }
   }

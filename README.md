@@ -71,7 +71,7 @@ export default {
 - :css    = jika mau mengcustom tampilan table
 - api-url = alamat api GET
 
--## 3. Integrasi Create Form
+## 3. Integrasi Create Form
 1. Buat form dengan 3 inputan field (name, salary, age).
 2. Siapkan satu object variable untuk menampung data requestData, contoh:
 ```
@@ -95,7 +95,7 @@ await this.$axios
 - `then` berfungsi jika API yang di request berhasil
 - `catch` berfunsi jika API yand di request gagal
 
--## 4. Integrasi Detail
+## 4. Integrasi Detail
 1. Copy form dari add dan beri nama file `_id.vue`
 2. tambahkan fungsi di `methods`:
 ```
@@ -117,7 +117,8 @@ async getDetail() {
 - `id` berfungsi mengambil id dari url
 - `$axios.$get(url)` befungsi mengambil data dari API dengan memberikan syarat id
 3. Panggil fungsi tersebut kedalam `mounted` agar dijalankan pertama kali
--## 5. Integrasi Update
+
+## 5. Integrasi Update
 1. Copy form dari add dan buat folder dengan nama `edit` dan buat 1 file didalam folder tersebut dengan nama file `_id.vue`
 2. rubah fungsi submit formnya ke fungsi update:
 ```
@@ -142,6 +143,29 @@ async submitEdit(e) {
 ```
 - berbeda dengan detail maupun update, jika update menggunakan fungsi `$put`
 - dengan mengirimkan alamat update beserta id yang akan dirubah, dan mengirimkan `requestData`
+
+## 6. Integrasi Delete
+1. buat fungsi untuk delete seperti berikut:
+```
+async employeeDelete(id) {
+  if (confirm('Are you sure delete this employee?')) {
+    await this.$axios
+      .$delete(`alamat_delete/id`, {
+        data: {
+          _id: id
+        }
+      })
+      .then((result) => {
+        alert('Data berhasil dihapus!')
+      })
+      .catch((error) => {
+        console.log('error:', error)
+      })
+  }
+}
+```
+- `confirm()` membuat konfirmasi dari alert
+- `.$delete(alamat_delete/id, requestBody)` masukan alamat_delete dan id yang sesuai, jika memerlukan requestBody maka tambahkan seperti contoh diatas 
 
 Resource:
 API : https://almock.alterra.dev/enhydra/
