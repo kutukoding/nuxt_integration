@@ -1,4 +1,4 @@
-<template>
+-<template>
   <div class="columns">
     <div class="column is-half is-offset-one-quarter">
       <form @submit="submitAdd">
@@ -54,6 +54,8 @@
 </template>
 
 <script>
+// import swal from 'vue-sweetalert2'
+
 export default {
   data() {
     return {
@@ -73,8 +75,9 @@ export default {
         age: this.age
       }
       await this.$axios
-        .$post(`${this.baseApi}create`, requestData)
-        .then(function() {
+        .$post(`${this.baseApi}Create`, requestData)
+        .then((data) => {
+          alert('Data Berhasil disimpan!')
           window.location = '/'
         })
         .catch((error) => {

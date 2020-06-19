@@ -12,7 +12,7 @@
         ref="vuetable"
         :fields="['employee_name', 'employee_salary', 'employee_age', 'action']"
         :css="table"
-        api-url="http://dummy.restapiexample.com/api/v1/employees"
+        :api-url="baseApi"
       >
         <div slot="employee_salary" slot-scope="props">
           Rp{{
@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      base_api: process.env.BASE_API,
+      baseApi: process.env.BASE_API,
       table: {
         tableWrapper: '',
         tableHeaderClass: 'fixed',

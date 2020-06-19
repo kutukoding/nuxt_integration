@@ -71,7 +71,7 @@ export default {
 - :css    = jika mau mengcustom tampilan table
 - api-url = alamat api GET
 
-## 3. Integrasi Create Form
+-## 3. Integrasi Create Form
 1. Buat form dengan 3 inputan field (name, salary, age).
 2. Siapkan satu object variable untuk menampung data requestData, contoh:
 ```
@@ -94,6 +94,7 @@ await this.$axios
 ```
 - `then` berfungsi jika API yang di request berhasil
 - `catch` berfunsi jika API yand di request gagal
+
 
 Resource:
 Free API : http://dummy.restapiexample.com/
