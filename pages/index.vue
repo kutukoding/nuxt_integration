@@ -1,35 +1,78 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        nuxt_integration
-      </h1>
-      <h2 class="subtitle">
-        basic integration API with nuxt js
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div class="columns">
+    <div class="column is-three-fifths is-offset-one-fifth">
+      <a
+        href="employee/add"
+        class="button is-primary is-pulled-right"
+        style="margin: 20px 0;"
+      >
+        Add Employee
+      </a>
+      <vuetable
+        ref="vuetable"
+        :fields="['employee_name', 'employee_salary', 'employee_age', 'action']"
+        :css="table"
+        :api-url="baseApi"
+      >
+        <div slot="employee_salary" slot-scope="props">
+          Rp{{
+            props.rowData.employee_salary
+              .toString()
+              .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+          }}
+        </div>
+        <div slot="action" slot-scope="props">
+          <a :href="`employee/${props.rowData.id}`">Detail</a>
+          <a :href="`employee/edit/${props.rowData.id}`">Edit</a>
+          <a @click="employeeDelete(props.rowData.id)">Delete</a>
+        </div>
+      </vuetable>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Vuetable from 'vuetable-2'
 
 export default {
   components: {
-    Logo
+    Vuetable
+  },
+  data() {
+    return {
+      baseApi: process.env.BASE_API,
+      table: {
+        tableWrapper: '',
+        tableHeaderClass: 'fixed',
+        tableBodyClass: 'vuetable-semantic-no-top fixed',
+        tableClass: 'table is-fullwidth is-striped',
+        loadingClass: 'loading',
+        ascendingIcon: 'blue chevron up icon',
+        descendingIcon: 'blue chevron down icon',
+        ascendingClass: 'sorted-asc',
+        descendingClass: 'sorted-desc',
+        sortableIcon: 'grey sort icon',
+        handleIcon: 'grey sidebar icon'
+      }
+    }
+  },
+  methods: {
+    async employeeDelete(id) {
+      if (confirm('Are you sure delete this employee?')) {
+        await this.$axios
+          .$delete(`${this.baseApi}Delete/1`, {
+            data: {
+              _id: id
+            }
+          })
+          .then((result) => {
+            alert('Data berhasil dihapus!')
+          })
+          .catch((error) => {
+            console.log('error:', error)
+          })
+      }
+    }
   }
 }
 </script>
