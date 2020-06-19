@@ -95,6 +95,28 @@ await this.$axios
 - `then` berfungsi jika API yang di request berhasil
 - `catch` berfunsi jika API yand di request gagal
 
+-## 4. Integrasi Detail
+1. Copy form dari add dan beri nama file `_id.vue`
+2. tambahkan fungsi di `methods`:
+```
+async getDetail() {
+  const { id } = this.$route.params
+  const thisVue = this
+  await this.$axios
+    .$get(`url_get/${id}`)
+    .then((result) => {
+      thisVue.name = result.employee_name
+      thisVue.salary = result.employee_salary
+      thisVue.age = result.employee_age
+    })
+    .catch((error) => {
+      console.log('error:', error)
+    })
+}
+```
+- `id` berfungsi mengambil id dari url
+- `$axios.$get(url)` befungsi mengambil data dari API dengan memberikan syarat id
+3. Panggil fungsi tersebut kedalam `mounted` agar dijalankan pertama kali
 
 Resource:
-Free API : http://dummy.restapiexample.com/
+API : https://almock.alterra.dev/enhydra/

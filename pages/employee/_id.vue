@@ -7,6 +7,7 @@
           <div class="control">
             <input
               v-model="name"
+              readonly
               class="input"
               type="text"
               placeholder="please input employee name"
@@ -26,6 +27,7 @@
                 <p class="control is-expanded">
                   <input
                     v-model="salary"
+                    readonly
                     class="input"
                     type="number"
                     placeholder="Your phone number"
@@ -41,13 +43,16 @@
           <div class="control">
             <input
               v-model="age"
+              readonly
               class="input"
               type="number"
               placeholder="please input age"
             />
           </div>
         </div>
-        <button class="button is-primary is-pulled-right">Save</button>
+        <router-link to="/" class="button is-secondary is-pulled-left">
+          Back
+        </router-link>
       </form>
     </div>
   </div>
@@ -63,19 +68,24 @@ export default {
       age: 0
     }
   },
+  mounted() {
+    this.getDetail()
+  },
   methods: {
     async getDetail() {
       const { id } = this.$route.params
-      const result = await this.$axios
-        .$get(`${this.baseApi}employee/${id}`)
+      const thisVue = this
+      await this.$axios
+        .$get(`${this.baseApi}/${id}`)
+        .then((result) => {
+          thisVue.name = result.employee_name
+          thisVue.salary = result.employee_salary
+          thisVue.age = result.employee_age
+        })
         .catch((error) => {
           console.log('error:', error)
         })
-      console.log(result)
     }
-  },
-  mounted() {
-    this.getDetail()
   }
 }
 </script>
